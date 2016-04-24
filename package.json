@@ -1,0 +1,19 @@
+{
+  "name": "walking",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.10.0",
+    "d3": "^3.5.16",
+    "jquery": "^2.2.3",
+    "topojson": "^1.6.24",
+    "webpack": "^1.13.0"
+  }
+}
