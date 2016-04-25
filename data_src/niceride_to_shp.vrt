@@ -1,0 +1,12 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="2013_station_locations">
+        <SrcDataSource>NRMN-2013-results/2013_station_locations.csv</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>EPSG:4326</LayerSRS>
+        <GeometryField encoding="PointFromColumns" x="Longitude" y="Latitude"/>
+        <Field name="terminal" src="Terminal" type="Integer" />
+        <Field name="address" src="Station" type="String" />
+        <Field name="location" src="Location" type="String" />
+        <Field name="dock_count" src="Nb docks" type="Integer" />
+    </OGRVRTLayer>
+</OGRVRTDataSource>
