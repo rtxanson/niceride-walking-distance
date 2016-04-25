@@ -137,15 +137,12 @@ choropleth:
 ### Build all the data for web
 ### 
 .PHONY: web
-web: export \
-	 json/blockgroups.and.cities.topo.json \
-	 choropleth
+web: json/blockgroups.and.cities.topo.json \
+	 assets
 
-.PHONY: topojsons
-topojsons:  data/blockgroups.and.cities.topo.json
-
-export: geojsons \
-		topojsons
+.PHONY: assets
+assets:
+	webpack
 
 clean:
 	rm data/*.sql
@@ -156,8 +153,10 @@ clean:
 init:
 	virtualenv env 
 	. env/bin/activate && pip install -r requirements.txt
-	npm install topojson
+	npm install
+	bower install
 	mkdir -p data
+	mkdir -p json
 	mkdir -p tmp
 
 test:
