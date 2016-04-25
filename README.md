@@ -1,4 +1,4 @@
-# Niceride coverage for .25 mi walking distance
+# MSP Niceride coverage for .25 mi walking distance
 
 ![Example output](img/niceride.png)
 
