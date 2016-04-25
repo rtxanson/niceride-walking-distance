@@ -11,7 +11,6 @@ SHP2PGSQL := /Applications/Postgres.app/Contents/Versions/9.5/bin/shp2pgsql
 
 ### Do the actual data install, and post-install operations.
 # TODO: bikeways
-# /Applications/Postgres.app/Contents/Versions/9.5/bin/psql -p5432 -d walking -f data/bikeways.postgis.sql
 .PHONY: install_tables
 install_tables:
 	/Applications/Postgres.app/Contents/Versions/9.5/bin/psql -p5432 -d walking -f data/cities.postgis.sql
@@ -19,6 +18,7 @@ install_tables:
 	/Applications/Postgres.app/Contents/Versions/9.5/bin/psql -p5432 -d walking -f data/blockgroups.postgis.sql
 	/Applications/Postgres.app/Contents/Versions/9.5/bin/psql -p5432 -d walking -f data/hennepin.centerlines.postgis.sql
 	/Applications/Postgres.app/Contents/Versions/9.5/bin/psql -p5432 -d walking -f data/ramsey.centerlines.postgis.sql
+	/Applications/Postgres.app/Contents/Versions/9.5/bin/psql -p5432 -d walking -f data/bikeways.postgis.sql
 	@echo " ... This will take a while. ... "
 	. env/bin/activate && python post_db_install.py
 	@echo " ... DONE ... "
@@ -75,11 +75,11 @@ data/hennepin.centerlines.postgis.sql: data_src/henn_centerlines/LOCATION_HENNEP
 	$(OGR2OGR) -F "ESRI Shapefile" -s_srs $(CENSUS_SOURCE_SRS) -t_srs $(TARGET_SRS) tmp/centerlines_reproject $^
 	$(SHP2PGSQL) -c -d -D -i -W LATIN1 -I tmp/centerlines_reproject/LOCATION_HENNEPIN_GIS_STREET_CENTERLINE.shp > $@
 
-# data/bikeways.postgis.sql: data_src/Bikeways/Bikeways.shp
-# 	rm -rf tmp/bikeways_reproject
-# 	mkdir -p tmp/bikeways_reproject
-# 	$(OGR2OGR) -F "ESRI Shapefile" -s_srs $(CENSUS_SOURCE_SRS) -t_srs $(TARGET_SRS) tmp/bikeways_reproject $^
-# 	$(SHP2PGSQL) -c -d -D -i -W LATIN1 -I tmp/bikeways_reproject/Bikeways.shp > $@
+data/bikeways.postgis.sql: data_src/Bikeways/Bikeways.shp
+	rm -rf tmp/bikeways_reproject
+	mkdir -p tmp/bikeways_reproject
+	$(OGR2OGR) -F "ESRI Shapefile" -s_srs $(CENSUS_SOURCE_SRS) -t_srs $(TARGET_SRS) tmp/bikeways_reproject $^
+	$(SHP2PGSQL) -c -d -D -i -W LATIN1 -I tmp/bikeways_reproject/Bikeways.shp > $@
 
 data/ramsey.centerlines.postgis.sql: data_src/ramsey_streets/TRANS_Street.shp
 	rm -rf tmp/r_centerlines_reproject
@@ -141,6 +141,7 @@ data/blockgroups.and.cities.topo.json: data/blockgroups.geo.json \
 		--id-property id \
 		--bbox -p \
 		-- \
+            bikeways=data/streets.geo.json \
 			blockgroups=data/blockgroups.geo.json \
 			cities=data/cities.geo.json \
 			stations=data/stations.geo.json \

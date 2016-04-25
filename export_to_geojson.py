@@ -374,10 +374,10 @@ def main():
             or_( HennStreet.lft_city == 'MINNEAPOLIS'
                , HennStreet.rt_city == 'MINNEAPOLIS'
                )
-          , or_( HennStreet.street_nam.in_(allowed_streets)
-               , HennStreet.st_pre_typ.in_(allowed_street_types)
-               , HennStreet.alt_name1.in_(allowed_alt_names)
-               )
+          # , or_( HennStreet.street_nam.in_(allowed_streets)
+          #      , HennStreet.st_pre_typ.in_(allowed_street_types)
+          #      , HennStreet.alt_name1.in_(allowed_alt_names)
+          #      )
         )
     )
 
@@ -386,10 +386,10 @@ def main():
             or_( RamseyStreet.leftcityna == 'Saint Paul'
                , RamseyStreet.rightcityn == 'Saint Paul'
                )
-          , or_( RamseyStreet.streetna_1.in_(allowed_streets)
-               , RamseyStreet.streetpret.in_(allowed_street_types)
-               , RamseyStreet.altname1.in_(allowed_alt_names)
-               )
+          # , or_( RamseyStreet.streetna_1.in_(allowed_streets)
+          #      , RamseyStreet.streetpret.in_(allowed_street_types)
+          #      , RamseyStreet.altname1.in_(allowed_alt_names)
+          #      )
         )
     )
 
