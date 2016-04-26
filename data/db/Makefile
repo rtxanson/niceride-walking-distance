@@ -1,17 +1,17 @@
 PSQL := /Applications/Postgres.app/Contents/Versions/9.5/bin/psql -p5432
 DB   := walking
 
-SQLs := cities.postgis.sql \
-		stations.postgis.sql \
-		hennepin.centerlines.postgis.sql \
-		ramsey.centerlines.postgis.sql
+SQLs := ../tmp/cities.postgis.sql \
+		../tmp/stations.postgis.sql \
+		../tmp/hennepin.centerlines.postgis.sql \
+		../tmp/ramsey.centerlines.postgis.sql
 
 FAKE_TARGETS := $(SQLs:%.sql=tmp/%.installed_sql)
 
 TARGETS := $(FAKE_TARGETS)
 
 .PHONY: install_tables
-tmp/%.installed_sql: data/%.sql
+tmp/%.installed_sql: ../tmp/%.sql
 	@echo $(PSQL) -d $(DB) -f $^
 	touch $@
 

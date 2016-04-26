@@ -3,6 +3,7 @@ export SHP2PGSQL := /Applications/Postgres.app/Contents/Versions/9.5/bin/shp2pgs
 
 export WITH_VIRTUALENV := . $(shell pwd)/env/bin/activate
 export SCRIPTS := $(shell pwd)/scripts
+export WEBPACK := $(shell which webpack)
 
 ##
 ### Makefile doc
@@ -60,7 +61,7 @@ init:
 	virtualenv env 
 	. env/bin/activate && pip install -r requirements.txt
 	npm install
-	bower install
+	$(MAKE) -C web init
 	mkdir -p data
 	mkdir -p json
 	mkdir -p tmp
