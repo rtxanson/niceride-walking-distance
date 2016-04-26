@@ -242,7 +242,7 @@ def main():
     session = get_session()
 
     init_new_tables(session)
-    read_csv(session, BlockGroupProperties, 'data/blockgroup_population.csv')
+    # read_csv(session, BlockGroupProperties, 'data/blockgroup_population.csv')
     # read_ride_csv(session, Ride, 'data_src/NRMN-2013-results/all-rentals-2013.csv')
 
     print "Cleaning data."
