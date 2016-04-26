@@ -1,0 +1,10 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="bikeStations">
+        <SrcDataSource>tmp/bikeStations.csv</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>EPSG:4326</LayerSRS>
+        <GeometryField encoding="PointFromColumns" x="long" y="lat"/>
+        <Field name="terminal" src="terminalName" type="Integer" />
+        <Field name="address" src="name" type="String" />
+    </OGRVRTLayer>
+</OGRVRTDataSource>
